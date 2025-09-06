@@ -9,3 +9,5 @@ requirement
     2.1 a box for day in the week which the student need to absent
     2.2 a box for reason to absent
     2.3 a submit button send POST request to server
+
+3. a button to send DELETE request to delete the timetable
