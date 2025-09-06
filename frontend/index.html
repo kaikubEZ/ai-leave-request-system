@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Leave Request System</title>
+  <style>
+    /* Basic Reset + Layout */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background: #4a90e2;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      padding: 1rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    form {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    form input, form textarea, form button {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    table th, table td {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    table th {
+      background: #f0f0f0;
+    }
+    .actions button {
+      margin-right: 0.5rem;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      form input, form textarea, form button {
+        font-size: 0.9rem;
+      }
+      table, table th, table td {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AI Leave Request System</h1>
+  </header>
+
+  <main>
+    <!-- Leave Request Form -->
+    <form id="leaveForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="date" id="startDate" required>
+      <input type="date" id="endDate" required>
+      <textarea id="reason" placeholder="Reason for Leave" rows="3" required></textarea>
+      <button type="button" id="aiCheckBtn">Check with AI</button>
+      <button type="submit">Submit Request</button>
+    </form>
+
+    <!-- Leave Request List -->
+    <h2>Leave Requests</h2>
+    <table id="leaveTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be dynamically added here -->
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    // Basic JS Skeleton
+    const leaveForm = document.getElementById('leaveForm');
+    const leaveTable = document.getElementById('leaveTable').querySelector('tbody');
+    const aiCheckBtn = document.getElementById('aiCheckBtn');
+
+    // Mock database (in-memory for now)
+    let leaveRequests = [];
+
+    // Handle AI Check button
+    aiCheckBtn.addEventListener('click', () => {
+      const reason = document.getElementById('reason').value;
+      alert("AI would check this reason: " + reason);
+      // TODO: call backend API with LLM integration
+    });
+
+    // Handle Submit
+    leaveForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const request = {
+        id: Date.now(),
+        name: document.getElementById('name').value,
+        start: document.getElementById('startDate').value,
+        end: document.getElementById('endDate').value,
+        reason: document.getElementById('reason').value,
+        status: 'Pending'
+      };
+      leaveRequests.push(request);
+      renderTable();
+      leaveForm.reset();
+    });
+
+    // Render Table
+    function renderTable() {
+      leaveTable.innerHTML = '';
+      leaveRequests.forEach(req => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${req.name}</td>
+          <td>${req.start}</td>
+          <td>${req.end}</td>
+          <td>${req.reason}</td>
+          <td>${req.status}</td>
+          <td class="actions">
+            <button onclick="editRequest(${req.id})">Edit</button>
+            <button onclick="deleteRequest(${req.id})">Delete</button>
+          </td>
+        `;
+        leaveTable.appendChild(row);
+      });
+    }
+
+    // Edit Request
+    function editRequest(id) {
+      const req = leaveRequests.find(r => r.id === id);
+      if (req) {
+        document.getElementById('name').value = req.name;
+        document.getElementById('startDate').value = req.start;
+        document.getElementById('endDate').value = req.end;
+        document.getElementById('reason').value = req.reason;
+        deleteRequest(id);
+      }
+    }
+
+    // Delete Request
+    function deleteRequest(id) {
+      leaveRequests = leaveRequests.filter(r => r.id !== id);
+      renderTable();
+    }
+  </script>
+</body>
+</html>
