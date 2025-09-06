@@ -272,9 +272,7 @@ h2 {
     border: 1px solid #f5c6cb;
 }
 
-.hidden {
-    display: none;
-}
+
 
 /* Modal */
 .modal {
@@ -384,4 +382,8 @@ h2 {
     .modal-footer {
         flex-direction: column;
     }
+}
+
+.hidden {
+    display: none;
 }
