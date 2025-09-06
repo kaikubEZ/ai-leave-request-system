@@ -1,181 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Leave Request System</title>
-  <style>
-    /* Basic Reset + Layout */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background: #4a90e2;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-    main {
-      padding: 1rem;
-      max-width: 800px;
-      margin: auto;
-    }
-    form {
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      margin-bottom: 2rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    form input, form textarea, form button {
-      display: block;
-      width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.5rem;
-      font-size: 1rem;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    table th, table td {
-      padding: 0.75rem;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-    table th {
-      background: #f0f0f0;
-    }
-    .actions button {
-      margin-right: 0.5rem;
-      padding: 0.25rem 0.5rem;
-      font-size: 0.9rem;
-    }
-    @media (max-width: 600px) {
-      form input, form textarea, form button {
-        font-size: 0.9rem;
-      }
-      table, table th, table td {
-        font-size: 0.85rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Absence Notification System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 </head>
 <body>
-  <header>
-    <h1>AI Leave Request System</h1>
-  </header>
+    <div class="container">
+        <header>
+            <h1>Student Absence Notification System</h1>
+        </header>
 
-  <main>
-    <!-- Leave Request Form -->
-    <form id="leaveForm">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="date" id="startDate" required>
-      <input type="date" id="endDate" required>
-      <textarea id="reason" placeholder="Reason for Leave" rows="3" required></textarea>
-      <button type="button" id="aiCheckBtn">Check with AI</button>
-      <button type="submit">Submit Request</button>
-    </form>
+        <!-- Student ID Input Section -->
+        <section class="student-section">
+            <h2>Load Your Timetable</h2>
+            <div class="input-group">
+                <input type="text" id="studentId" placeholder="Enter your Student ID" />
+                <button id="loadTimetable" class="btn btn-primary">Load Timetable</button>
+            </div>
+        </section>
 
-    <!-- Leave Request List -->
-    <h2>Leave Requests</h2>
-    <table id="leaveTable">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Reason</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Rows will be dynamically added here -->
-      </tbody>
-    </table>
-  </main>
+        <!-- Timetable Section -->
+        <section class="timetable-section">
+            <h2>Weekly Timetable</h2>
+            <div class="timetable-container">
+                <table id="timetable">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="time-slot">8:00-9:00</td>
+                            <td class="editable" data-day="monday" data-period="1"></td>
+                            <td class="editable" data-day="tuesday" data-period="1"></td>
+                            <td class="editable" data-day="wednesday" data-period="1"></td>
+                            <td class="editable" data-day="thursday" data-period="1"></td>
+                            <td class="editable" data-day="friday" data-period="1"></td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">9:00-10:00</td>
+                            <td class="editable" data-day="monday" data-period="2"></td>
+                            <td class="editable" data-day="tuesday" data-period="2"></td>
+                            <td class="editable" data-day="wednesday" data-period="2"></td>
+                            <td class="editable" data-day="thursday" data-period="2"></td>
+                            <td class="editable" data-day="friday" data-period="2"></td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">10:00-11:00</td>
+                            <td class="editable" data-day="monday" data-period="3"></td>
+                            <td class="editable" data-day="tuesday" data-period="3"></td>
+                            <td class="editable" data-day="wednesday" data-period="3"></td>
+                            <td class="editable" data-day="thursday" data-period="3"></td>
+                            <td class="editable" data-day="friday" data-period="3"></td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">11:00-12:00</td>
+                            <td class="editable" data-day="monday" data-period="4"></td>
+                            <td class="editable" data-day="tuesday" data-period="4"></td>
+                            <td class="editable" data-day="wednesday" data-period="4"></td>
+                            <td class="editable" data-day="thursday" data-period="4"></td>
+                            <td class="editable" data-day="friday" data-period="4"></td>
+                        </tr>
+                        <tr class="lunch-break">
+                            <td class="time-slot">12:00-13:00</td>
+                            <td colspan="5" class="lunch">LUNCH BREAK</td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">13:00-14:00</td>
+                            <td class="editable" data-day="monday" data-period="5"></td>
+                            <td class="editable" data-day="tuesday" data-period="5"></td>
+                            <td class="editable" data-day="wednesday" data-period="5"></td>
+                            <td class="editable" data-day="thursday" data-period="5"></td>
+                            <td class="editable" data-day="friday" data-period="5"></td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">14:00-15:00</td>
+                            <td class="editable" data-day="monday" data-period="6"></td>
+                            <td class="editable" data-day="tuesday" data-period="6"></td>
+                            <td class="editable" data-day="wednesday" data-period="6"></td>
+                            <td class="editable" data-day="thursday" data-period="6"></td>
+                            <td class="editable" data-day="friday" data-period="6"></td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">15:00-16:00</td>
+                            <td class="editable" data-day="monday" data-period="7"></td>
+                            <td class="editable" data-day="tuesday" data-period="7"></td>
+                            <td class="editable" data-day="wednesday" data-period="7"></td>
+                            <td class="editable" data-day="thursday" data-period="7"></td>
+                            <td class="editable" data-day="friday" data-period="7"></td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">16:00-17:00</td>
+                            <td class="editable" data-day="monday" data-period="8"></td>
+                            <td class="editable" data-day="tuesday" data-period="8"></td>
+                            <td class="editable" data-day="wednesday" data-period="8"></td>
+                            <td class="editable" data-day="thursday" data-period="8"></td>
+                            <td class="editable" data-day="friday" data-period="8"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="timetable-actions">
+                <button id="updateTimetable" class="btn btn-success">Update Timetable</button>
+                <button id="deleteTimetable" class="btn btn-danger">Delete Timetable</button>
+            </div>
+        </section>
 
-  <script>
-    // Basic JS Skeleton
-    const leaveForm = document.getElementById('leaveForm');
-    const leaveTable = document.getElementById('leaveTable').querySelector('tbody');
-    const aiCheckBtn = document.getElementById('aiCheckBtn');
+        <!-- Absence Form Section -->
+        <section class="absence-section">
+            <h2>Report Absence</h2>
+            <form id="absenceForm" class="absence-form">
+                <div class="form-group">
+                    <label for="absenceDay">Day of Absence:</label>
+                    <select id="absenceDay" required>
+                        <option value="">Select Day</option>
+                        <option value="today">Today</option>
+                        <option value="tomorrow">Tomorrow</option>
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="absenceReason">Reason for Absence:</label>
+                    <textarea id="absenceReason" rows="4" placeholder="Please provide the reason for your absence..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Absence Notification</button>
+            </form>
+        </section>
 
-    // Mock database (in-memory for now)
-    let leaveRequests = [];
+        <!-- Status Messages -->
+        <div id="statusMessage" class="status-message hidden"></div>
+    </div>
 
-    // Handle AI Check button
-    aiCheckBtn.addEventListener('click', () => {
-      const reason = document.getElementById('reason').value;
-      alert("AI would check this reason: " + reason);
-      // TODO: call backend API with LLM integration
-    });
+    <!-- Modal for editing class details -->
+    <div id="classModal" class="modal, hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Class Details</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="subjectName">Subject Name:</label>
+                    <input type="text" id="subjectName" placeholder="Enter subject name">
+                </div>
+                <div class="form-group">
+                    <label for="teacherName">Teacher Name:</label>
+                    <input type="text" id="teacherName" placeholder="Enter teacher name">
+                </div>
+                <div class="form-group">
+                    <label for="teacherEmail">Teacher Email:</label>
+                    <input type="email" id="teacherEmail" placeholder="Enter teacher email">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveClass" class="btn btn-success">Save</button>
+                <button id="cancelEdit" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
 
-    // Handle Submit
-    leaveForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const request = {
-        id: Date.now(),
-        name: document.getElementById('name').value,
-        start: document.getElementById('startDate').value,
-        end: document.getElementById('endDate').value,
-        reason: document.getElementById('reason').value,
-        status: 'Pending'
-      };
-      leaveRequests.push(request);
-      renderTable();
-      leaveForm.reset();
-    });
-
-    // Render Table
-    function renderTable() {
-      leaveTable.innerHTML = '';
-      leaveRequests.forEach(req => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${req.name}</td>
-          <td>${req.start}</td>
-          <td>${req.end}</td>
-          <td>${req.reason}</td>
-          <td>${req.status}</td>
-          <td class="actions">
-            <button onclick="editRequest(${req.id})">Edit</button>
-            <button onclick="deleteRequest(${req.id})">Delete</button>
-          </td>
-        `;
-        leaveTable.appendChild(row);
-      });
-    }
-
-    // Edit Request
-    function editRequest(id) {
-      const req = leaveRequests.find(r => r.id === id);
-      if (req) {
-        document.getElementById('name').value = req.name;
-        document.getElementById('startDate').value = req.start;
-        document.getElementById('endDate').value = req.end;
-        document.getElementById('reason').value = req.reason;
-        deleteRequest(id);
-      }
-    }
-
-    // Delete Request
-    function deleteRequest(id) {
-      leaveRequests = leaveRequests.filter(r => r.id !== id);
-      renderTable();
-    }
-  </script>
+    
 </body>
 </html>
+
+
