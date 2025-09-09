@@ -13,6 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // use routes
-app.use("/items", ItemRoute);
+app.use("/", ItemRoute);
 
 export default app;

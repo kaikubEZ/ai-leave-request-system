@@ -4,6 +4,7 @@ import * as itemController from "./itemController.js";
 
 const router = express.Router();
 
+router.get("/", itemController.home);
 router.get("/api/timetable", itemController.getTimeTable);
 router.put("/api/timetable", itemController.updateTimeTable);
 router.delete("/api/timetable", itemController.deleteTable);
