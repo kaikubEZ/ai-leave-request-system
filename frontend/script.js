@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Show demo message
     setTimeout(() => {
         const messageEl = document.getElementById('statusMessage');
-        messageEl.innerHTML = '💡 <strong>Demo Tip:</strong> Try entering "demo123" as Student ID to see a sample timetable!';
         messageEl.className = 'status-message success';
         messageEl.classList.remove('hidden');
         
@@ -104,7 +103,7 @@ class AbsenceNotificationSystem {
             
             if (response.success) {
                 this.currentStudentId = studentId;
-                this.timetableData = response.data || {};
+                this.timetableData = response || {};
                 this.renderTimetable();
                 this.showMessage('Timetable loaded successfully!', 'success');
             } else {
@@ -360,7 +359,32 @@ class AbsenceNotificationSystem {
 
         // Simulate different responses based on the endpoint
         if (url.includes('/api/timetable') && method === 'GET') {
-            // Simulate
+            let result = await fetch(url).then((r)=>r.json());
+            return result;
+        }
+        else if (url.includes('/api/timetable') && method === 'POST') {
+            let result = await fetch(url, {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: data,
+            }).then((r) => r.json());
+            return result;
+        }
+        else if (url.includes('/api/timetable') && method === 'DELETE') {
+            let result = await fetch(url, {method: "DELETE"});
+            return result;
+        }
+        else if (url.includes('/api/timetable') && method === 'UPDATE') {
+            let result = await fetch(url, {
+                method: "UPDATE",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: data,
+            }).then((r) => r.json());
+            return result;
         }
     }
 }
