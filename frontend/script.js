@@ -1,3 +1,4 @@
+const SERVER_IP = "";
 document.addEventListener('DOMContentLoaded', () => {
     new AbsenceNotificationSystem();
     
@@ -354,6 +355,7 @@ class AbsenceNotificationSystem {
     async mockApiCall(method, url, data = null) {
         // Simulate network delay
         await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
+        url = SERVER_IP+url;
 
         console.log(`${method} ${url}`, data);
 
