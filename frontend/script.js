@@ -1,4 +1,4 @@
-const SERVER_IP = "";
+const SERVER_IP = "http://localhost:3222";
 document.addEventListener('DOMContentLoaded', () => {
     new AbsenceNotificationSystem();
     
