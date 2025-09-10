@@ -364,13 +364,13 @@ class AbsenceNotificationSystem {
             let result = await fetch(url).then((r)=>r.json());
             return result;
         }
-        else if (url.includes('/api/timetable') && method === 'POST') {
+        else if (url.includes('/api/absence') && method === 'POST') {
             let result = await fetch(url, {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json",
                 },
-                body: data,
+                body: JSON.stringify(data),
             }).then((r) => r.json());
             return result;
         }
@@ -378,13 +378,13 @@ class AbsenceNotificationSystem {
             let result = await fetch(url, {method: "DELETE"});
             return result;
         }
-        else if (url.includes('/api/timetable') && method === 'UPDATE') {
+        else if (url.includes('/api/timetable') && method === 'PUT') {
             let result = await fetch(url, {
-                method: "UPDATE",
+                method: "PUT",
                 headers: {
                 "Content-Type": "application/json",
                 },
-                body: data,
+                body: JSON.stringify(data),
             }).then((r) => r.json());
             return result;
         }
