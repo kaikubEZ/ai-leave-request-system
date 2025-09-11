@@ -5,12 +5,13 @@
 AI Leave Request System เป็นเว็บแอปสำหรับช่วยนิสิต/นักศึกษาสร้างอีเมลขอลาโดยอัตโนมัติจากข้อมูลตารางเรียนและเหตุผลการขาดเรียน ระบบสกัดข้อมูลผู้สอนจากตาราง แล้วเรียกใช้ LLM (Google Generative Language API) เพื่อสร้างอีเมลแบบสุภาพทั้งภาษาไทยและอังกฤษ ผู้ใช้สามารถตรวจสอบและแก้ไขก่อนส่งจริง
 
 สมาชิกกลุ่ม 21
-Theerith Tantirodchanamate (Leader)
-Alangkorn Thongkhong
-Sarana Thanadeecharoenchok
-Ratchaphon Pungtamgerdpol
-Phumsith Sirichotevanich
-Thanasorn Thanamaschaijaroen
+-Theerith Tantirodchanamate (Leader)
+-Alangkorn Thongkhong
+-Sarana Thanadeecharoenchok
+-Ratchaphon Pungtamgerdpol
+-Phumsith Sirichotevanich
+-Thanasorn Thanamaschaijaroen
+
 GitHub: https://github.com/kaikubEZ/ai-leave-request-system
 
 ไดเรกทอรีสำคัญ
@@ -106,5 +107,6 @@ Backend จะรวมข้อมูล `studentId`, `day`, `reason` และ
 - Env example: `backend/.env.example`
 
 ต้องการให้ผมเพิ่มตัวอย่าง prompt ที่บังคับให้โมเดลคืน JSON หรือเพิ่ม script ทดสอบ (Jest/Node) ให้ใน repo ไหม? แจ้งได้เลยผมจะจัดให้
+
 
 
