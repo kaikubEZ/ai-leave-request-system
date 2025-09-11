@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import ItemRoute from "./itemRoute.js";
+import TableRoute from "./tableRoute.js";
 
 const app = express();
 
@@ -13,6 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // use routes
-app.use("/", ItemRoute);
+app.use("/", TableRoute);
 
 export default app;

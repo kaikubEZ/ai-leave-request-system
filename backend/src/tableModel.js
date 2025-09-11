@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 const tableSchema = new mongoose.Schema({
   type: Object,
   required: false,
-  
 });
 
 const timeTable = mongoose.model("timeTable", tableSchema);
