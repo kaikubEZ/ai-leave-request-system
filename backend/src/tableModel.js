@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const tableSchema = new mongoose.Schema({
   studentId:{
     type: Number,
-    required: true
+    required: false
   },
   timetable:{
-    type: Object,
-    required: true,
+    type: mongoose.SchemaTypes.Mixed,
+    required: false
   }
 });
 

@@ -20,17 +20,18 @@ export const getTimeTable = async (req, res) => {
 export const updateTimeTable = async (req, res) => {
     console.log("updateTimeTable");
     //console.log(req.body);
-    let id = req.body.studentId;
-    let timeTable = req.body.timetable;
+    const id = req.body.studentId;
+    const timeTables = req.body.timetable;
     console.log(id);
-    console.log(timeTable);
+    console.log(timeTables);
 
-    let temp = await TimeTable.find();
+    const temp = await TimeTable.find({});
     console.log(temp); //test db
 
     try{
-        await TimeTable.updateOne({studentId:id}, {$set:{timeTable:timeTable}});
-        let table = await TimeTable.findOne({studentId:id});
+        const res = await TimeTable.updateOne({studentId:id}, {$set:{timeTable:timeTables}});
+        const table = await TimeTable.findOne({studentId:id});
+        console.log(res);
         console.log(table);
         res.status(200).json(table);
     }
