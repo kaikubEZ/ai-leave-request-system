@@ -38,7 +38,7 @@ export const updateTimeTable = async (req, res) => {
         try{
             await TimeTable.insertOne({studentId:id, timetable:timeTable});
             let table = await TimeTable.findOne({studentId:id});
-            console.log(table);
+            console.log("insert:"+table);
             res.status(200).json(table);
         }catch{
             res.status(500).json({ message: "cannot add" });
