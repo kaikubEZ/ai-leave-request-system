@@ -25,15 +25,21 @@ export const updateTimeTable = async (req, res) => {
     console.log(id);
     console.log(timeTable);
     try{
+        await TimeTable.updateOne({studentId:id}, {$set:{timeTable:timeTable}});
         let table = await TimeTable.findOne({studentId:id});
-        table.
         console.log(table);
         res.status(200).json(table);
     }
     catch{
-        res.status(500).json({ message: "cannot add" });
+        try{
+            await TimeTable.insertOne({studentId:id, timetable:timeTable});
+            let table = await TimeTable.findOne({studentId:id});
+            console.log(table);
+            res.status(200).json(table);
+        }catch{
+            res.status(500).json({ message: "cannot add" });
+        }
     }
-    res.status(500).json({ message: "OK" });
 };
 export const deleteTable = async (req, res) => {
     console.log("deleteTable");
