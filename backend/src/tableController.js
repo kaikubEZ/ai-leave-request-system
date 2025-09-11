@@ -1,11 +1,14 @@
+import timeTable from "../models/tableModel.js";
+
 export const home = async (req, res) => {
     console.log("getTimeTable");
     res.status(500).json({ message: "OK" });
 };
 export const getTimeTable = async (req, res) => {
     console.log("getTimeTable");
-    let id = req.params.id
-    console.log(id)
+    let id = req.params.id;
+    console.log(id);
+    
     res.status(500).json({ message: "OK" });
 };
 export const updateTimeTable = async (req, res) => {
