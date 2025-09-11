@@ -1,0 +1,16 @@
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent" \
+  -H 'Content-Type: application/json' \
+  -H 'X-goog-api-key: GEMINI_API_KEY' \
+  -X POST \
+  -d '{
+    "contents": [
+      {
+        "parts": [
+          {
+            "text": "Help me generate an excuse email in these reason <absenceReason> on <absenceDay> from student id <studentId>
+                    get information about the subject,teacher,teacher's email from <updateTimeTable> in formal Thai and English"
+          }
+        ]
+      }
+    ]
+  }'

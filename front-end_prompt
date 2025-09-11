@@ -1,0 +1,15 @@
+# give me a frontend single webpage with one css and one javascript file.
+purpose: for student to automaticly send e-mails to teachers anouncing them that the student have an incident that make him absent.
+requirement.
+1. show timetable of students:
+    1.1 containing 4 of morning class and 4 of afternoon class and a blank in between for lunch time.
+    1.2 each class in timetable contain information: subject name, teacher's name, teacher's email.
+    1.3 student can fill a box above timetable with student ID to use GET method for their own timetable.
+    1.4 table is editable and have submit button for tell backend to make change table using UPDATE method with timetable data in form of json.
+
+2. a form containing:
+    2.1 a box for day in the week which the student need to absent.
+    2.2 a box for reason to absent.
+    2.3 a submit button send POST request to server.
+
+3. a button to send DELETE request to delete the timetable.
