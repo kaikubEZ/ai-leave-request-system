@@ -24,6 +24,10 @@ export const updateTimeTable = async (req, res) => {
     let timeTable = req.body.timetable;
     console.log(id);
     console.log(timeTable);
+
+    let temp = await TimeTable.find();
+    console.log(temp); //test db
+    
     try{
         await TimeTable.updateOne({studentId:id}, {$set:{timeTable:timeTable}});
         let table = await TimeTable.findOne({studentId:id});
@@ -43,13 +47,14 @@ export const updateTimeTable = async (req, res) => {
 };
 export const deleteTable = async (req, res) => {
     console.log("deleteTable");
-    let id = req.params.id
-    console.log(id)
+    let id = req.params.id;
+    //to do
+    console.log(id);
     res.status(500).json({ message: "OK" });
 };
 export const sendAbsenceMessage = async (req, res) => {
     console.log("sendAbsenceMessage");
-    //console.log(req.body);
+    //to do
     let id = req.body.studentId;
     let day = req.body.day;
     let reason = req.body.reason;

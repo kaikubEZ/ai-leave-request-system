@@ -1,3 +1,4 @@
+import connectDB from "./db.js";
 import app from "./app.js";
 
 // This is for maintaining the server.
@@ -17,6 +18,9 @@ process.on("unhandledRejection", (err) => {
 });
 
 const PORT = 3222;
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Backend Server ready at http://localhost:${PORT}`);
+
+connectDB().then(() => {
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });
