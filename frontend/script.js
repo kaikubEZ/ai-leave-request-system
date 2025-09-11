@@ -115,7 +115,7 @@ class AbsenceNotificationSystem {
             }
         } catch (error) {
             this.showMessage('Error loading timetable: ' + error.message, 'error');
-            this.currentStudentId = studentId; // please remove this when backend ready #VERY IMPORTANT !!!
+            //this.currentStudentId = studentId; // please remove this when backend ready #VERY IMPORTANT !!!
         }
     }
 
