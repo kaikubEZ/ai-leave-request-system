@@ -11,7 +11,7 @@ const tableSchema = new mongoose.Schema({
   }
 });
 
-const timeTable = mongoose.model("timeTable", tableSchema);
+const TimeTable = mongoose.model("timeTable", tableSchema);
 
 
-export default timeTable;
+export default TimeTable;

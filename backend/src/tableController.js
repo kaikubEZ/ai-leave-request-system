@@ -1,4 +1,4 @@
-import timeTable from "../models/tableModel.js";
+import TimeTable from "./tableModel.js";
 
 export const home = async (req, res) => {
     console.log("getTimeTable");
@@ -8,8 +8,14 @@ export const getTimeTable = async (req, res) => {
     console.log("getTimeTable");
     let id = req.params.id;
     console.log(id);
-    
-    res.status(500).json({ message: "OK" });
+    try{
+        let table = await TimeTable.findOne({studentId:id});
+        console.log(table);
+        res.status(200).json(table);
+    }
+    catch{
+        res.status(500).json({ message: "cannot find" });
+    }
 };
 export const updateTimeTable = async (req, res) => {
     console.log("updateTimeTable");
