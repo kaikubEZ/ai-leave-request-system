@@ -100,7 +100,7 @@ class AbsenceNotificationSystem {
             this.showMessage('Loading timetable...', 'success');
             
             // Simulate GET request to load timetable
-            const response = await this.mockApiCall('GET', `/api/timetable?studentId=${studentId}`);
+            const response = await this.mockApiCall('GET', `/api/timetable/${studentId}`);
             
             if (response.success) {
                 this.currentStudentId = studentId;
@@ -232,7 +232,7 @@ class AbsenceNotificationSystem {
             this.showMessage('Deleting timetable...', 'success');
             
             // Simulate DELETE request
-            const response = await this.mockApiCall('DELETE', `/api/timetable?studentId=${this.currentStudentId}`);
+            const response = await this.mockApiCall('DELETE', `/api/timetable/${this.currentStudentId}`);
 
             if (response.success) {
                 this.currentStudentId = null;
