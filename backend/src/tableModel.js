@@ -3,10 +3,9 @@
 import mongoose from "mongoose";
 
 const tableSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: false,
-  }
+  type: Object,
+  required: false,
+  
 });
 
 const timeTable = mongoose.model("timeTable", tableSchema);
