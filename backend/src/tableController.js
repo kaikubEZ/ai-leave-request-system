@@ -9,9 +9,9 @@ export const getTimeTable = async (req, res) => {
     let id = req.params.id;
     console.log(id);
     try{
-        let table = await TimeTable.findOne({studentId:id});
-        console.log(table);
-        res.status(200).json(table);
+        let tables = await TimeTable.findOne({studentId:id});
+        console.log(tables);
+        res.status(200).json(tables);
     }
     catch{
         res.status(500).json({ message: "cannot find" });
@@ -27,7 +27,7 @@ export const updateTimeTable = async (req, res) => {
 
     let temp = await TimeTable.find();
     console.log(temp); //test db
-    
+
     try{
         await TimeTable.updateOne({studentId:id}, {$set:{timeTable:timeTable}});
         let table = await TimeTable.findOne({studentId:id});
