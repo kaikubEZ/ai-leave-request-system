@@ -45,9 +45,9 @@ export const updateTimeTable = async (req, res) => {
 export const deleteTable = async (req, res) => {
     console.log("deleteTable");
     let id = req.params.id;
-    //to do
-    console.log(id);
-    res.status(500).json({ message: "OK" });
+    const result = await TimeTable.deleteOne({studentId:id});
+    console.log(result);
+    res.status(200).json({ message: result});
 };
 export const sendAbsenceMessage = async (req, res) => {
     console.log("sendAbsenceMessage");

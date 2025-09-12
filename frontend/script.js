@@ -100,7 +100,7 @@ class AbsenceNotificationSystem {
             this.showMessage('Loading timetable...', 'success');
             
             // Simulate GET request to load timetable
-            const response = await this.mockApiCall('GET', `/api/timetable/${studentId}`);
+            const response = await fetch(`/api/timetable/${studentId}`);
             
             if (response.success) {
                 this.currentStudentId = studentId;
