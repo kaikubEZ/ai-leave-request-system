@@ -6,15 +6,15 @@ export const home = async (req, res) => {
 };
 export const getTimeTable = async (req, res) => {
     console.log("getTimeTable");
-    let id = req.params.id;
+    const id = req.params.id;
     console.log(id);
-    try{
-        let tables = await TimeTable.findOne({studentId:id});
-        console.log(tables);
-        res.status(200).json(tables);
-    }
-    catch{
+    const tables = await TimeTable.findOne({studentId:id});
+    console.log(tables);
+    if(tables==null){
         res.status(500).json({ message: "cannot find" });
+    }
+    else{
+        res.status(200).json(tables);
     }
 };
 export const updateTimeTable = async (req, res) => {
@@ -25,25 +25,21 @@ export const updateTimeTable = async (req, res) => {
     console.log(id);
     console.log(timeTables);
 
-    const temp = await TimeTable.find({});
-    console.log(temp); //test db
-
-    try{
-        const res = await TimeTable.updateOne({studentId:id}, {$set:{timeTable:timeTables}});
-        const table = await TimeTable.findOne({studentId:id});
-        console.log(res);
-        console.log(table);
-        res.status(200).json(table);
+    const tableexist = await TimeTable.findOne({studentId:id});
+    console.log(tableexist);
+    if(tableexist!=null){
+        console.log("already exist");
+        const result = await TimeTable.updateOne({studentId:id}, {$set:{timeTable:timeTables}});
+        console.log(result);
+        res.status(200).json(result);
     }
-    catch{
-        try{
-            await TimeTable.insertOne({studentId:id, timetable:timeTable});
-            let table = await TimeTable.findOne({studentId:id});
-            console.log("insert:"+table);
-            res.status(200).json(table);
-        }catch{
-            res.status(500).json({ message: "cannot add" });
-        }
+    else{
+        console.log("not exist");
+        const result = await TimeTable.create({studentId:id, timetable:timeTables});
+        const table = await TimeTable.findOne({studentId:id});
+        console.log(result);
+        console.log("insert:"+table);
+        res.status(200).json(result);
     }
 };
 export const deleteTable = async (req, res) => {

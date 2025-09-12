@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             messageEl.classList.add('hidden');
         }, 8000);
-    }, 1000);
+    }, 4000);
 });
 
 class AbsenceNotificationSystem {
