@@ -1,4 +1,5 @@
 import TimeTable from "./tableModel.js";
+import { createEmail } from "./aiPrompt";
 
 export const home = async (req, res) => {
     console.log("getTimeTable");
@@ -52,9 +53,12 @@ export const deleteTable = async (req, res) => {
 export const sendAbsenceMessage = async (req, res) => {
     console.log("sendAbsenceMessage");
     //to do
+    // console.log(req.body);
     let id = req.body.studentId;
     let day = req.body.day;
     let reason = req.body.reason;
-    console.log(`${id} ${day} ${reason}`);
-    res.status(500).json({ message: "OK" });
+    let affectedClasses = req.body.affectedClasses;
+    console.log(`${id} ${day} ${reason} ${affectedClasses}`);
+    let s = createEmail(id, day, reason, affectedClasses);
+    res.status(200).json({ message: "OK" });
 };
