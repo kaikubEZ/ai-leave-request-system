@@ -1,5 +1,6 @@
 import TimeTable from "./tableModel.js";
-import { createEmail } from "./aiPrompt";
+import { createEmail } from "./bashAi.js";
+import { json } from "express";
 
 export const home = async (req, res) => {
     console.log("getTimeTable");
@@ -59,6 +60,17 @@ export const sendAbsenceMessage = async (req, res) => {
     let reason = req.body.reason;
     let affectedClasses = req.body.affectedClasses;
     console.log(`${id} ${day} ${reason} ${affectedClasses}`);
-    let s = createEmail(id, day, reason, affectedClasses);
-    res.status(200).json({ message: "OK" });
+    console.log(affectedClasses);
+    let content = await createEmail(id, day, reason, affectedClasses);
+    console.log(typeof(content)+": "+content);
+    try{
+        console.log(typeof(content.candidates)+": "+content.candidates);
+        console.log(typeof(content.candidates[0])+": "+content.candidates[0]);
+        console.log(typeof(content.candidates[0].content)+": "+content.candidates[0].content);
+        res.status(200).json(content);
+    }
+    catch(error){
+        console.log(error);
+        res.status(200).json(content);
+    }
 };

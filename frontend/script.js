@@ -286,12 +286,27 @@ class AbsenceNotificationSystem {
 
             if (response.success) {
                 this.showMessage(`Absence notifications sent to ${affectedClasses.length} teacher(s) successfully!`, 'success');
-                
                 // Reset form
                 document.getElementById('absenceForm').reset();
-                
                 // Show summary
                 this.showAbsenceSummary(affectedClasses, day, reason);
+                const responseJson = await response.json();
+                const text = responseJson.candidates[0].content;
+                let recipient = affectedClasses[0].email;
+
+                affectedClasses.forEach((email)=>{
+                    recipient+=","+email;
+                });
+
+                let link = `<input type="button" value="button name" onclick="window.open(
+                    'https://mail.google.com/mail/u/0/
+                    ?to=${encodeURIComponent(recipient)}
+                    &su=Absence in class in ${encodeURIComponent(day)}
+                    &body=${encodeURIComponent(text)}
+                    &tf=cm'
+                )" />`;
+                document.getElementById("email-link-space").innerHTML = link;
+                
             } else {
                 this.showMessage('Failed to send absence notifications', 'error');
             }
