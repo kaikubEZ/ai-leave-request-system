@@ -29,7 +29,7 @@ export const updateTimeTable = async (req, res) => {
     console.log(tableexist);
     if(tableexist!=null){
         console.log("already exist");
-        const result = await TimeTable.updateOne({studentId:id}, {$set:{timeTable:timeTables}});
+        const result = await TimeTable.updateOne({studentId:id}, {timetable:timeTables});
         console.log(result);
         res.status(200).json(result);
     }

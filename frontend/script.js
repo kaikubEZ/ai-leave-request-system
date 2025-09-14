@@ -100,11 +100,12 @@ class AbsenceNotificationSystem {
             this.showMessage('Loading timetable...', 'success');
             
             // Simulate GET request to load timetable
-            const response = await fetch(`/api/timetable/${studentId}`);
-            
-            if (response.success) {
+            const response = await fetch(SERVER_IP+`/api/timetable/${studentId}`);
+            const timetable = await response.json();
+            console.log(timetable);
+            if (response.status==200) {
                 this.currentStudentId = studentId;
-                this.timetableData = response || {};
+                this.timetableData = timetable.timetable || {};
                 this.renderTimetable();
                 this.showMessage('Timetable loaded successfully!', 'success');
             } else {
@@ -120,14 +121,15 @@ class AbsenceNotificationSystem {
     }
 
     renderTimetable() {
+        //console.log(this.timetableData);
         document.querySelectorAll('.editable').forEach(cell => {
             const day = cell.dataset.day;
             const period = cell.dataset.period;
             const key = `${day}_${period}`;
-            
             const classData = this.timetableData[key];
             
             if (classData) {
+                console.log(classData)
                 cell.innerHTML = `
                     <div class="class-info">
                         <div class="subject">${classData.subject}</div>
@@ -188,7 +190,8 @@ class AbsenceNotificationSystem {
             this.showMessage('Please fill all fields or leave all empty to remove class', 'error');
             return;
         }
-
+        console.log("saveClassDetailsFunc");
+        console.log(this.timetableData);
         this.renderTimetable();
         this.closeModal();
     }
