@@ -1,7 +1,7 @@
 import { exec } from 'child_process';
 
 export const createEmail = async (id, day, reason, affectedClasses) => {
-    const prompt = `Please write a formal leave request email for student ID: ${id}, requesting leave on ${day} due to "${reason}". The following classes will be affected: ${affectedClasses.join(", ")}.`;
+    const prompt = `Please write a formal leave request email for student ID: ${id}, requesting leave on ${day} due to "${reason}". The following classes will be affected: ${JSON.stringify(affectedClasses)}.`;
 
     // Escape double quotes in the prompt
     const escapedPrompt = prompt.replace(/"/g, '\\"');

@@ -284,28 +284,44 @@ class AbsenceNotificationSystem {
                 affectedClasses: affectedClasses
             });
 
-            if (response.success) {
+            
+
+            if (response) {
                 this.showMessage(`Absence notifications sent to ${affectedClasses.length} teacher(s) successfully!`, 'success');
                 // Reset form
                 document.getElementById('absenceForm').reset();
                 // Show summary
                 this.showAbsenceSummary(affectedClasses, day, reason);
-                const responseJson = await response.json();
-                const text = responseJson.candidates[0].content;
+                console.log(typeof(response));
+                console.log("recieve response: ")
+                console.log(response);
+                let responsetext;
+                try{
+                    responsetext = response.contents;
+                } 
+                catch(error){
+                    console.log(error);
+                }
+                console.log("converted to text: ")
+                console.log(responsetext);
+                
                 let recipient = affectedClasses[0].email;
 
-                affectedClasses.forEach((email)=>{
-                    recipient+=","+email;
+                affectedClasses.forEach((period)=>{
+                    recipient+=","+period.email;
                 });
 
-                let link = `<input type="button" value="button name" onclick="window.open(
-                    'https://mail.google.com/mail/u/0/
-                    ?to=${encodeURIComponent(recipient)}
-                    &su=Absence in class in ${encodeURIComponent(day)}
-                    &body=${encodeURIComponent(text)}
-                    &tf=cm'
-                )" />`;
-                document.getElementById("email-link-space").innerHTML = link;
+                console.log(recipient);
+                try{
+                let link = `<input type="button" value="button name" onclick="window.open('https://mail.google.com/mail/u/0/?to=${encodeURIComponent(recipient)}&su=Absence in class in ${encodeURIComponent(day)}&body=${encodeURIComponent(responsetext)}&tf=cm')" />`;
+
+                console.log(link);
+                
+                    document.getElementById("email-link-space").innerHTML = link;
+                }
+                catch(error){
+                    console.log(error);
+                }
                 
             } else {
                 this.showMessage('Failed to send absence notifications', 'error');

@@ -384,6 +384,12 @@ h2 {
     }
 }
 
+#email-link-space{
+    min-height: 50px;
+    background-color: #ccc;
+    margin: 20px;
+}
+
 .hidden {
     display: none;
 }
